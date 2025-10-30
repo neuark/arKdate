@@ -27,7 +27,22 @@ if [ -f /usr/bin/pacman ]; then
 
 fi
 
-echo "checking for flatpak or snaps"
+if [ -f /usr/bin/apt ]; then
+  echo "your host package maneger is apt"
+  # this part updates your system with pacman auto yes promtes
+  apt update
+  if [ $? -ne 0 ];
+    then echo "a fuckry acourd"
+  fi 
+  apt upgrade -y
+  if [ $? -ne 0 ];
+    then echo "a fuckry acourd"
+  fi
+
+fi
+
+
+echo "checking for non natvie "
 which flatpak=$flatpakdir
 
 if [ -f /usr/bin/flatpak ]; then
